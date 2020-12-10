@@ -1,22 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ArrayContext } from "../contexts/ArrayContext";
 import Box from "./Box";
 
 export default function SortingBody() {
-  const { array, setArrayVal } = useContext(ArrayContext);
-  let arr = array.slice(0);
-  for (let i = 1; i <= 30; i++) {
-    arr = [
-      ...arr,
-      {
-        height: Math.floor(Math.random() * 500 + 100),
-        sorted: false,
-        current: false,
-      },
-    ];
+  const { array, setArrayVal, array_size } = useContext(ArrayContext);
+  function createArray() {
+    let arr = [];
+    for (let i = 1; i <= array_size; i++) {
+      arr = [
+        ...arr,
+        {
+          height: Math.floor(Math.random() * 500 + 100),
+          sorted: false,
+          current: false,
+          notsure: false,
+        },
+      ];
+    }
+    return arr;
   }
   // eslint-disable-next-line
-  React.useEffect(() => setArrayVal(arr), []);
+  useEffect(() => {
+    // eslint-disable-next-line
+    setArrayVal(createArray());
+  }, [array_size]);
   return (
     <div className="sorting-body">
       <div className="boxes">

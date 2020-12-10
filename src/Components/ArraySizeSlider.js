@@ -9,28 +9,28 @@ export default class TimeSlider extends Component {
     this.output = null;
   }
   componentDidMount() {
-    this.rangeslider = document.getElementById("timeRange");
-    this.output = document.getElementById("timeOut");
-    this.output.innerHTML = this.rangeslider.value + "s";
+    this.rangeslider = document.getElementById("array_size_range");
+    this.output = document.getElementById("array_size");
+    this.output.innerHTML = this.rangeslider.value;
   }
   render() {
-    const { time, setTime } = this.context;
+    const { array_size, setArraySize } = this.context;
     return (
       <>
         <div className="slidecontainer">
           <p>
-            Time: <span id="timeOut"></span>
+            Array Size: <span id="array_size"></span>
           </p>
           <input
             type="range"
-            min="1"
-            max="500"
+            min="6"
+            max="70"
             className="slider"
-            id="timeRange"
-            value={time}
+            id="array_size_range"
+            value={array_size}
             onInput={(e) => {
-              setTime(e.target.value);
-              this.output.innerHTML = e.target.value + "s";
+              setArraySize(e.target.value);
+              this.output.innerHTML = e.target.value;
             }}
             disabled={this.props.sorting}
           />
