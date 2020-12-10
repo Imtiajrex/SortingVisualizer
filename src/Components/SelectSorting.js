@@ -1,39 +1,47 @@
-import { React, useState } from "react";
+import { React, useContext } from "react";
+import { ArrayContext } from "../contexts/ArrayContext";
 
-export default function SelectSorting() {
-  const [sorting_type, setSortingType] = useState("");
+export default function SelectSorting({ sorting }) {
+  const { sort_type, setSortType } = useContext(ArrayContext);
   return (
     <div className="select">
-      <div className="selection">
-        {sorting_type === "" ? "Sorting Type..." : sorting_type}{" "}
+      <div
+        className="selection"
+        style={sorting ? { filter: "brightness(0.4)" } : {}}
+      >
+        {sort_type === "" ? "Sorting Type..." : sort_type}{" "}
         <i className="fas fa-caret-down"></i>
       </div>
-      <div className="options">
-        <div
-          className="option"
-          onClick={() => {
-            setSortingType("Bubble Sort");
-          }}
-        >
-          Bubble Sort
+      {!sorting ? (
+        <div className="options">
+          <div
+            className="option"
+            onClick={() => {
+              setSortType("Bubble Sort");
+            }}
+          >
+            Bubble Sort
+          </div>
+          <div
+            className="option"
+            onClick={() => {
+              setSortType("Selection Sort");
+            }}
+          >
+            Selection Sort
+          </div>
+          <div
+            className="option"
+            onClick={() => {
+              setSortType("Insertion Sort");
+            }}
+          >
+            Insertion Sort
+          </div>
         </div>
-        <div
-          className="option"
-          onClick={() => {
-            setSortingType("Selection Sort");
-          }}
-        >
-          Selection Sort
-        </div>
-        <div
-          className="option"
-          onClick={() => {
-            setSortingType("NoJani Sort");
-          }}
-        >
-          NoJani Sort
-        </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
